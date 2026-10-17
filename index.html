@@ -1,1 +1,936 @@
+```html
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>منصة سكنك | Sakanak - سكنك الأنسب بضغطة زر</title>
+  
+  <!-- خط تجوال و كايرو -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  
+  <!-- مكتبة Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- مكتبة الأيقونات Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#f0f9ff',
+              100: '#e0f2fe',
+              500: '#0284c7',
+              600: '#0369a1',
+              700: '#075985',
+              800: '#0c4a6e',
+              900: '#082f49',
+            },
+            emeraldAccent: {
+              500: '#10b981',
+              600: '#059669',
+            },
+            warmGold: {
+              400: '#fbbf24',
+              500: '#f59e0b',
+            }
+          },
+          fontFamily: {
+            cairo: ['Cairo', 'sans-serif'],
+            tajawal: ['Tajawal', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      font-family: 'Cairo', sans-serif;
+    }
+    .glass-effect {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    .glass-dark {
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(14px);
+    }
+    .hero-glow {
+      background: radial-gradient(circle at 50% 20%, rgba(2, 132, 199, 0.15) 0%, rgba(16, 185, 129, 0.08) 50%, transparent 80%);
+    }
+    .custom-shadow {
+      box-shadow: 0 20px 40px -15px rgba(2, 132, 199, 0.12);
+    }
+    /* Pulse badge */
+    @keyframes pulseSlow {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.04); opacity: 0.9; }
+    }
+    .animate-pulse-slow {
+      animation: pulseSlow 3s infinite ease-in-out;
+    }
+  </style>
+</head>
+
+<body class="bg-slate-50 text-slate-800 antialiased selection:bg-brand-500 selection:text-white">
+
+  <!-- ==================== 1. Header / Navbar ==================== -->
+  <header class="fixed top-0 left-0 right-0 z-50 glass-effect border-b border-slate-200/60 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        
+        <!-- Logo -->
+        <a href="https://sakanak.web.app" class="flex items-center gap-3 group">
+          <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-brand-700 via-brand-600 to-emeraldAccent-500 flex items-center justify-center text-white shadow-lg shadow-brand-500/30 group-hover:rotate-6 transition-all duration-300">
+            <i class="fa-solid fa-house-chimney-window text-2xl"></i>
+          </div>
+          <div class="flex flex-col">
+            <span class="text-2xl font-black bg-gradient-to-l from-brand-800 via-brand-600 to-emeraldAccent-600 bg-clip-text text-transparent">سَكَنَكْ</span>
+            <span class="text-[10px] tracking-widest font-bold text-slate-500 uppercase -mt-1">Sakanak Living</span>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation Links -->
+        <nav class="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-600">
+          <a href="#features" class="hover:text-brand-600 transition">المميزات</a>
+          <a href="#categories" class="hover:text-brand-600 transition">فئات السكن</a>
+          <a href="#how-it-works" class="hover:text-brand-600 transition">كيف نعمل</a>
+          <a href="#owners" class="hover:text-brand-600 transition">لأصحاب العقارات</a>
+          <a href="#testimonials" class="hover:text-brand-600 transition">آراء العملاء</a>
+          <a href="#faq" class="hover:text-brand-600 transition">الأسئلة الشائعة</a>
+        </nav>
+
+        <!-- CTA Buttons -->
+        <div class="hidden sm:flex items-center gap-3">
+          <a href="https://sakanak.web.app" target="_blank" class="px-4 py-2.5 rounded-xl border border-slate-300 font-bold text-sm text-slate-700 hover:bg-slate-100 hover:text-brand-700 transition flex items-center gap-2">
+            <i class="fa-solid fa-plus-circle text-emeraldAccent-500"></i>
+            <span>أضف عقارك</span>
+          </a>
+          <a href="https://sakanak.web.app" target="_blank" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-brand-600 to-brand-700 hover:from-brand-700 hover:to-brand-800 text-white font-bold text-sm shadow-md shadow-brand-600/30 hover:shadow-lg transition-all duration-300 flex items-center gap-2">
+            <span>دخول المنصة</span>
+            <i class="fa-solid fa-arrow-left text-xs"></i>
+          </a>
+        </div>
+
+        <!-- Mobile Menu Toggle Button -->
+        <div class="md:hidden flex items-center">
+          <button id="mobileMenuBtn" class="p-2.5 rounded-xl text-slate-700 hover:bg-slate-100 focus:outline-none">
+            <i class="fa-solid fa-bars-staggered text-xl"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobileMenu" class="hidden md:hidden bg-white border-b border-slate-200 px-6 py-5 space-y-4 shadow-xl">
+      <nav class="flex flex-col space-y-3 font-semibold text-slate-700">
+        <a href="#features" class="mobile-nav-link py-2 border-b border-slate-100">المميزات</a>
+        <a href="#categories" class="mobile-nav-link py-2 border-b border-slate-100">فئات السكن</a>
+        <a href="#how-it-works" class="mobile-nav-link py-2 border-b border-slate-100">كيف نعمل</a>
+        <a href="#owners" class="mobile-nav-link py-2 border-b border-slate-100">لأصحاب العقارات</a>
+        <a href="#testimonials" class="mobile-nav-link py-2 border-b border-slate-100">آراء وتجارب</a>
+        <a href="#faq" class="mobile-nav-link py-2">الأسئلة الشائعة</a>
+      </nav>
+      <div class="flex flex-col gap-2 pt-2">
+        <a href="https://sakanak.web.app" target="_blank" class="w-full text-center py-3 bg-brand-600 text-white rounded-xl font-bold shadow-md">
+          دخول المنصة الرئيسية
+        </a>
+        <a href="https://sakanak.web.app" target="_blank" class="w-full text-center py-3 bg-slate-100 text-slate-700 rounded-xl font-bold">
+          أضف عقارك مجاناً
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="pt-24">
+    <!-- ==================== 2. Hero Section ==================== -->
+    <section class="relative hero-glow overflow-hidden pt-8 pb-20 lg:pt-14 lg:pb-32">
+      <!-- Background Shapes -->
+      <div class="absolute -top-32 -left-32 w-96 h-96 bg-brand-200/40 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute top-1/2 -right-32 w-96 h-96 bg-emeraldAccent-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        
+        <!-- Trust Tag -->
+        <div class="flex justify-center mb-6">
+          <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-50 border border-brand-200/80 text-brand-700 text-xs sm:text-sm font-bold shadow-sm">
+            <span class="flex h-2.5 w-2.5 relative">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emeraldAccent-500 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emeraldAccent-600"></span>
+            </span>
+            المنصة الذكية الأولى لحجز وتأجير السكن بدون سماسرة
+          </div>
+        </div>
+
+        <!-- Main Title & Subtitle -->
+        <div class="text-center max-w-4xl mx-auto">
+          <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black text-slate-900 leading-tight mb-6 tracking-tight">
+            سكنك الأنسب بضغطة زر <br class="hidden sm:inline" />
+            <span class="bg-gradient-to-r from-brand-600 via-brand-700 to-emeraldAccent-600 bg-clip-text text-transparent">
+              راحتك واستقرارك يبدأ من هنا
+            </span>
+          </h1>
+          <p class="text-base sm:text-xl text-slate-600 leading-relaxed max-w-2xl mx-auto font-medium mb-10">
+            اكتشف آلاف الخيارات السكنية المفحوصة والموثقة: شقق عائلية، استوديوهات راقية، وسكن مخصص للطلاب والمغتربين مع تجول افتراضي وتواصل مباشر مع المالك.
+          </p>
+        </div>
+
+        <!-- Interactive Search Card -->
+        <div class="max-w-4xl mx-auto bg-white rounded-3xl p-4 sm:p-6 shadow-2xl border border-slate-200/80 custom-shadow mb-16">
+          <div class="flex border-b border-slate-100 pb-3 mb-4 gap-4 text-sm font-bold text-slate-500">
+            <button type="button" class="search-tab-btn active text-brand-600 border-b-2 border-brand-600 pb-1 flex items-center gap-2">
+              <i class="fa-solid fa-magnifying-glass"></i> بحث فوري
+            </button>
+            <button type="button" class="search-tab-btn hover:text-slate-800 pb-1 flex items-center gap-2">
+              <i class="fa-solid fa-graduation-cap"></i> قريب من جامعتي
+            </button>
+            <button type="button" class="search-tab-btn hover:text-slate-800 pb-1 flex items-center gap-2">
+              <i class="fa-solid fa-couch"></i> شقق مفروشة بالكامل
+            </button>
+          </div>
+
+          <form id="heroSearchForm" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 items-center">
+            <!-- City Selection -->
+            <div class="flex flex-col">
+              <label class="text-xs font-bold text-slate-500 mb-1 flex items-center gap-1.5">
+                <i class="fa-solid fa-location-dot text-brand-600"></i> المدينة أو المنطقة
+              </label>
+              <select id="searchCity" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-3 text-sm font-semibold text-slate-700 focus:outline-none focus:ring-2 focus:ring-brand-500 transition">
+                <option value="all">كل المدن والمناطق</option>
+                <option value="cairo">القاهرة الكبرى / التجمع / المعادي</option>
+                <option value="giza">الجيزة / الشيخ زايد / 6 أكتوبر</option>
+                <option value="alex">الإسكندرية</option>
+                <option value="mansoura">المنصورة (محيط الجامعات)</option>
+                <option value="assiut">أسيوط الجديدة</option>
+              </select>
+            </div>
+
+            <!-- Property Type -->
+            <div class="flex flex-col">
+              <label class="text-xs font-bold text-slate-500 mb-1 flex items-center gap-1.5">
+                <i class="fa-solid fa-building-user text-emeraldAccent-500"></i> فئة السكن
+              </label>
+              <select id="searchType" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-3 text-sm font-semibold text-slate-700 focus:outline-none focus:ring-2 focus:ring-brand-500 transition">
+                <option value="all">جميع الأنواع</option>
+                <option value="students">سكن طلاب ومغتربين</option>
+                <option value="studio">استوديو خاص مفروش</option>
+                <option value="family">شقة عائلية فاخرة</option>
+                <option value="shared">غرفة بسكن مشترك</option>
+              </select>
+            </div>
+
+            <!-- Price Range -->
+            <div class="flex flex-col">
+              <label class="text-xs font-bold text-slate-500 mb-1 flex items-center gap-1.5">
+                <i class="fa-solid fa-coins text-warmGold-500"></i> الميزانية الشهرية
+              </label>
+              <select id="searchPrice" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-3 text-sm font-semibold text-slate-700 focus:outline-none focus:ring-2 focus:ring-brand-500 transition">
+                <option value="all">أي ميزانية</option>
+                <option value="economic">اقتصادي (أقل من 3,000 ج.م)</option>
+                <option value="medium">متوسط (3,000 - 7,000 ج.م)</option>
+                <option value="premium">فاخر (+7,000 ج.م)</option>
+              </select>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="flex items-end pt-2 sm:pt-0">
+              <a href="https://sakanak.web.app" target="_blank" class="w-full h-[46px] rounded-xl bg-gradient-to-l from-brand-600 to-emeraldAccent-600 hover:from-brand-700 hover:to-emeraldAccent-700 text-white font-bold flex items-center justify-center gap-2 shadow-lg shadow-brand-500/25 transition-all duration-300">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <span>ابحث في سكنك</span>
+              </a>
+            </div>
+          </form>
+
+          <!-- Quick tags -->
+          <div class="mt-4 pt-3 border-t border-slate-100 flex flex-wrap items-center gap-2 text-xs text-slate-500 font-medium">
+            <span class="text-slate-400">الأكثر بحثاً:</span>
+            <a href="https://sakanak.web.app" class="px-2.5 py-1 bg-slate-100 hover:bg-brand-50 hover:text-brand-600 rounded-lg transition">استوديو مدينة نصر</a>
+            <a href="https://sakanak.web.app" class="px-2.5 py-1 bg-slate-100 hover:bg-brand-50 hover:text-brand-600 rounded-lg transition">سكن طلاب جامعة القاهرة</a>
+            <a href="https://sakanak.web.app" class="px-2.5 py-1 bg-slate-100 hover:bg-brand-50 hover:text-brand-600 rounded-lg transition">شقق التجمع الخامس</a>
+            <a href="https://sakanak.web.app" class="px-2.5 py-1 bg-slate-100 hover:bg-brand-50 hover:text-brand-600 rounded-lg transition">سكن بنات مفروش</a>
+          </div>
+        </div>
+
+        <!-- Live Trust Stats -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-5xl mx-auto">
+          <div class="bg-white/80 p-5 rounded-2xl border border-slate-200/60 shadow-sm text-center">
+            <p class="text-3xl sm:text-4xl font-black text-brand-700 mb-1">+15,000</p>
+            <p class="text-xs sm:text-sm font-semibold text-slate-500">عقار ووحدة سكنية مسجلة</p>
+          </div>
+          <div class="bg-white/80 p-5 rounded-2xl border border-slate-200/60 shadow-sm text-center">
+            <p class="text-3xl sm:text-4xl font-black text-emeraldAccent-600 mb-1">+50,000</p>
+            <p class="text-xs sm:text-sm font-semibold text-slate-500">مستأجر وطالب مستقر</p>
+          </div>
+          <div class="bg-white/80 p-5 rounded-2xl border border-slate-200/60 shadow-sm text-center">
+            <p class="text-3xl sm:text-4xl font-black text-warmGold-500 mb-1">99.2%</p>
+            <p class="text-xs sm:text-sm font-semibold text-slate-500">تقييمات ورضا المستخدمين</p>
+          </div>
+          <div class="bg-white/80 p-5 rounded-2xl border border-slate-200/60 shadow-sm text-center">
+            <p class="text-3xl sm:text-4xl font-black text-brand-900 mb-1">0%</p>
+            <p class="text-xs sm:text-sm font-semibold text-slate-500">عمولات خفية أو سماسرة</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==================== 3. Property Categories ==================== -->
+    <section id="categories" class="py-20 bg-white border-y border-slate-100">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-2xl mx-auto mb-14">
+          <span class="text-brand-600 font-extrabold text-sm uppercase tracking-wider block mb-2">تنوع يلبي كل الاحتياجات</span>
+          <h2 class="text-3xl sm:text-4xl font-black text-slate-900">استكشف فئات السكن في منصة سكنك</h2>
+          <p class="text-slate-500 mt-3 text-base">سواء كنت طالباً، شاباً مغترباً، أو تبحث عن مسكن عائلي متكامل، لدينا الخيار الأمثل لك.</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          
+          <!-- Card 1 -->
+          <a href="https://sakanak.web.app" target="_blank" class="group relative overflow-hidden rounded-3xl bg-slate-50 border border-slate-200/80 p-6 hover:shadow-xl hover:border-brand-500 transition-all duration-300">
+            <div class="w-14 h-14 rounded-2xl bg-brand-100 text-brand-700 flex items-center justify-center text-2xl mb-5 group-hover:scale-110 transition duration-300">
+              <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+            <h3 class="text-xl font-bold text-slate-900 mb-2">سكن طلاب ومغتربين</h3>
+            <p class="text-slate-600 text-sm leading-relaxed mb-4">بجوار كبرى الجامعات، بيئة هادئة ومجهزة بإنترنت فائق السرعة ومساحات استذكار.</p>
+            <div class="flex items-center text-brand-600 text-sm font-bold gap-2 group-hover:gap-3 transition-all">
+              <span>تصفح الوحدات</span>
+              <i class="fa-solid fa-arrow-left text-xs"></i>
+            </div>
+          </a>
+
+          <!-- Card 2 -->
+          <a href="https://sakanak.web.app" target="_blank" class="group relative overflow-hidden rounded-3xl bg-slate-50 border border-slate-200/80 p-6 hover:shadow-xl hover:border-emeraldAccent-500 transition-all duration-300">
+            <div class="w-14 h-14 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center text-2xl mb-5 group-hover:scale-110 transition duration-300">
+              <i class="fa-solid fa-couch"></i>
+            </div>
+            <h3 class="text-xl font-bold text-slate-900 mb-2">استوديوهات مفروشة</h3>
+            <p class="text-slate-600 text-sm leading-relaxed mb-4">استقلالية كاملة مع فرش عصري وتجهيزات متكاملة، جاهزة للانتقال والسكن الفوري.</p>
+            <div class="flex items-center text-emerald-600 text-sm font-bold gap-2 group-hover:gap-3 transition-all">
+              <span>تصفح الوحدات</span>
+              <i class="fa-solid fa-arrow-left text-xs"></i>
+            </div>
+          </a>
+
+          <!-- Card 3 -->
+          <a href="https://sakanak.web.app" target="_blank" class="group relative overflow-hidden rounded-3xl bg-slate-50 border border-slate-200/80 p-6 hover:shadow-xl hover:border-brand-500 transition-all duration-300">
+            <div class="w-14 h-14 rounded-2xl bg-sky-100 text-sky-700 flex items-center justify-center text-2xl mb-5 group-hover:scale-110 transition duration-300">
+              <i class="fa-solid fa-people-roof"></i>
+            </div>
+            <h3 class="text-xl font-bold text-slate-900 mb-2">شقق عائلية راقية</h3>
+            <p class="text-slate-600 text-sm leading-relaxed mb-4">مساحات رحبة تناسب العائلات في أرقى الأحياء السكنية وبالقرب من جميع الخدمات الحيوية.</p>
+            <div class="flex items-center text-brand-600 text-sm font-bold gap-2 group-hover:gap-3 transition-all">
+              <span>تصفح الوحدات</span>
+              <i class="fa-solid fa-arrow-left text-xs"></i>
+            </div>
+          </a>
+
+          <!-- Card 4 -->
+          <a href="https://sakanak.web.app" target="_blank" class="group relative overflow-hidden rounded-3xl bg-slate-50 border border-slate-200/80 p-6 hover:shadow-xl hover:border-warmGold-500 transition-all duration-300">
+            <div class="w-14 h-14 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center text-2xl mb-5 group-hover:scale-110 transition duration-300">
+              <i class="fa-solid fa-users"></i>
+            </div>
+            <h3 class="text-xl font-bold text-slate-900 mb-2">سكن مشترك وموظفين</h3>
+            <p class="text-slate-600 text-sm leading-relaxed mb-4">غرف وأسرّة فردية ومشتركة للموظفين والشباب لتقليل التكاليف بأعلى معايير النظافة والراحة.</p>
+            <div class="flex items-center text-amber-600 text-sm font-bold gap-2 group-hover:gap-3 transition-all">
+              <span>تصفح الوحدات</span>
+              <i class="fa-solid fa-arrow-left text-xs"></i>
+            </div>
+          </a>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 4. Why Choose Sakanak (Features) ==================== -->
+    <section id="features" class="py-24 bg-slate-50 relative overflow-hidden">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="flex flex-col lg:flex-row items-center gap-14">
+          <!-- Text and feature list -->
+          <div class="lg:w-1/2">
+            <span class="text-emeraldAccent-600 font-extrabold text-sm uppercase tracking-wider block mb-3">لماذا يفضل الجميع سكنك؟</span>
+            <h2 class="text-3xl sm:text-4xl font-black text-slate-900 mb-6 leading-tight">
+              تجربة سكنية استثنائية تقضي على مشاكل الإيجار التقليدية
+            </h2>
+            <p class="text-slate-600 mb-8 leading-relaxed font-medium">
+              صممنا منصة <strong class="text-brand-700">سكنك (Sakanak)</strong> لنحول رحلة البحث عن مسكن من تجربة مرهقة ومليئة بالمفاجآت غير السارة إلى تجربة رقمية سهلة وآمنة توفر وقتك ومالك.
+            </p>
+
+            <div class="space-y-6">
+              
+              <!-- Feature 1 -->
+              <div class="flex gap-4">
+                <div class="flex-shrink-0 w-12 h-12 rounded-2xl bg-emerald-100 text-emeraldAccent-600 flex items-center justify-center text-xl shadow-sm">
+                  <i class="fa-solid fa-badge-check"></i>
+                </div>
+                <div>
+                  <h4 class="text-lg font-bold text-slate-900 mb-1">عقارات موثقة 100% ومطابقة للواقع</h4>
+                  <p class="text-slate-600 text-sm leading-relaxed">نقوم بمراجعة وفحص بيانات الوحدات والصور للتأكد من عدم وجود إعلانات وهمية أو معلومات مضللة.</p>
+                </div>
+              </div>
+
+              <!-- Feature 2 -->
+              <div class="flex gap-4">
+                <div class="flex-shrink-0 w-12 h-12 rounded-2xl bg-brand-100 text-brand-600 flex items-center justify-center text-xl shadow-sm">
+                  <i class="fa-solid fa-handshake-slash"></i>
+                </div>
+                <div>
+                  <h4 class="text-lg font-bold text-slate-900 mb-1">تواصل مباشر بدون سماسرة أو عمولات</h4>
+                  <p class="text-slate-600 text-sm leading-relaxed">تواصل فوراً مع صاحب العقار مباشرة عبر التطبيق أو الهاتف دون دفع شهور إضافية كعمولة سمسار.</p>
+                </div>
+              </div>
+
+              <!-- Feature 3 -->
+              <div class="flex gap-4">
+                <div class="flex-shrink-0 w-12 h-12 rounded-2xl bg-amber-100 text-amber-600 flex items-center justify-center text-xl shadow-sm">
+                  <i class="fa-solid fa-map-location-dot"></i>
+                </div>
+                <div>
+                  <h4 class="text-lg font-bold text-slate-900 mb-1">فلاتر ذكية وخريطة تفاعلية للجامعات</h4>
+                  <p class="text-slate-600 text-sm leading-relaxed">حدد كليتك أو مقر عملك لترى المساكن المحيطة والمسافة الحقيقية وخطوط المواصلات بدقة.</p>
+                </div>
+              </div>
+
+              <!-- Feature 4 -->
+              <div class="flex gap-4">
+                <div class="flex-shrink-0 w-12 h-12 rounded-2xl bg-sky-100 text-sky-600 flex items-center justify-center text-xl shadow-sm">
+                  <i class="fa-solid fa-shield-heart"></i>
+                </div>
+                <div>
+                  <h4 class="text-lg font-bold text-slate-900 mb-1">أمان وضمان حجز مستمر</h4>
+                  <p class="text-slate-600 text-sm leading-relaxed">دعم فني متواصل وحلول سريعة لأي استفسار لتشعر بالأمان التام من اليوم الأول وحتى انتهاء عقدك.</p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Feature Visual Showcase -->
+          <div class="lg:w-1/2 w-full">
+            <div class="relative mx-auto max-w-md lg:max-w-none">
+              <div class="relative bg-gradient-to-tr from-brand-800 to-slate-900 rounded-3xl p-6 sm:p-8 text-white shadow-2xl border border-slate-700/50 overflow-hidden">
+                <div class="absolute -right-10 -bottom-10 w-60 h-60 bg-brand-500/20 rounded-full blur-2xl"></div>
+                
+                <div class="flex items-center justify-between pb-6 border-b border-slate-700/80">
+                  <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-emeraldAccent-500/20 text-emeraldAccent-400 flex items-center justify-center font-bold">
+                      <i class="fa-solid fa-check"></i>
+                    </div>
+                    <div>
+                      <p class="text-xs text-slate-400">معاينة مباشرة</p>
+                      <h4 class="font-bold text-sm">استوديو فاخر - التجمع الخامس</h4>
+                    </div>
+                  </div>
+                  <span class="px-3 py-1 bg-emeraldAccent-500/20 text-emeraldAccent-300 text-xs rounded-full font-bold">موثق ومتاح</span>
+                </div>
+
+                <div class="my-6 space-y-4">
+                  <div class="p-4 rounded-2xl bg-slate-800/80 border border-slate-700 flex justify-between items-center">
+                    <span class="text-slate-300 text-sm"><i class="fa-solid fa-user-tie text-brand-400 ml-2"></i> المالك: د. أحمد المحمدي</span>
+                    <span class="text-xs text-emerald-400 font-bold">تواصل مباشر</span>
+                  </div>
+                  <div class="p-4 rounded-2xl bg-slate-800/80 border border-slate-700 flex justify-between items-center">
+                    <span class="text-slate-300 text-sm"><i class="fa-solid fa-wifi text-brand-400 ml-2"></i> إنترنت ومرافق:</span>
+                    <span class="text-xs text-slate-200 font-bold">شامل المياه والكهرباء والواي فاي</span>
+                  </div>
+                  <div class="p-4 rounded-2xl bg-slate-800/80 border border-slate-700 flex justify-between items-center">
+                    <span class="text-slate-300 text-sm"><i class="fa-solid fa-money-bill-wave text-brand-400 ml-2"></i> العمولة:</span>
+                    <span class="text-xs text-brand-300 font-extrabold">0% بدون أي وساطة</span>
+                  </div>
+                </div>
+
+                <div class="pt-2">
+                  <a href="https://sakanak.web.app" target="_blank" class="w-full block py-3.5 bg-gradient-to-r from-brand-500 to-emeraldAccent-500 hover:opacity-95 text-center rounded-xl font-bold text-sm shadow-lg transition">
+                    جرب المنصة الآن على sakanak.web.app
+                  </a>
+                </div>
+              </div>
+
+              <!-- Floating Micro-Badge -->
+              <div class="absolute -bottom-6 -right-4 sm:-right-8 bg-white p-4 rounded-2xl shadow-xl border border-slate-100 flex items-center gap-3 animate-pulse-slow">
+                <div class="w-10 h-10 rounded-xl bg-emeraldAccent-500 text-white flex items-center justify-center font-bold">
+                  <i class="fa-solid fa-shield-halved"></i>
+                </div>
+                <div>
+                  <p class="text-xs text-slate-400 font-semibold">حماية كاملة</p>
+                  <p class="text-sm font-black text-slate-800">بيانات وعقود معتمدة</p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==================== 5. How It Works ==================== -->
+    <section id="how-it-works" class="py-24 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-2xl mx-auto mb-16">
+          <span class="text-brand-600 font-extrabold text-sm uppercase tracking-wider block mb-2">رحلة سكنك في 4 خطوات</span>
+          <h2 class="text-3xl sm:text-4xl font-black text-slate-900">كيف تستأجر منزلك الجديد عبر سكنك؟</h2>
+          <p class="text-slate-500 mt-3 text-base">خطوات مدروسة وبسيطة تضمن وصولك للوحدة المناسبة واستلام المفتاح دون أي مجهود.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative">
+          
+          <!-- Step 1 -->
+          <div class="flex flex-col items-center text-center p-6 rounded-3xl bg-slate-50 border border-slate-100 hover:bg-brand-50/50 hover:border-brand-200 transition-all duration-300">
+            <div class="w-16 h-16 rounded-2xl bg-brand-600 text-white flex items-center justify-center text-2xl font-black shadow-lg shadow-brand-500/30 mb-6">
+              1
+            </div>
+            <h3 class="text-xl font-bold text-slate-900 mb-2">ابحث وحدد احتياجك</h3>
+            <p class="text-slate-600 text-sm leading-relaxed">استخدم الفلاتر لاختيار المدينة، الحي، نوع السكن، والميزانية المناسبة لك بمرونة تامة.</p>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="flex flex-col items-center text-center p-6 rounded-3xl bg-slate-50 border border-slate-100 hover:bg-emerald-50/50 hover:border-emerald-200 transition-all duration-300">
+            <div class="w-16 h-16 rounded-2xl bg-emeraldAccent-600 text-white flex items-center justify-center text-2xl font-black shadow-lg shadow-emeraldAccent-500/30 mb-6">
+              2
+            </div>
+            <h3 class="text-xl font-bold text-slate-900 mb-2">عاين بالتفصيل والصور</h3>
+            <p class="text-slate-600 text-sm leading-relaxed">شاهد صور حقيقية عالية الجودة، ومواصفات دقيقة لكل زاوية في الشقة وقربها من الخدمات.</p>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="flex flex-col items-center text-center p-6 rounded-3xl bg-slate-50 border border-slate-100 hover:bg-sky-50/50 hover:border-sky-200 transition-all duration-300">
+            <div class="w-16 h-16 rounded-2xl bg-sky-600 text-white flex items-center justify-center text-2xl font-black shadow-lg shadow-sky-500/30 mb-6">
+              3
+            </div>
+            <h3 class="text-xl font-bold text-slate-900 mb-2">تواصل واحجز وحدتك</h3>
+            <p class="text-slate-600 text-sm leading-relaxed">تحدث مباشرة مع المؤجر، نسق موعد المعاينة أو قم بتأكيد حجز غرفتك بكل سلاسة وسرية.</p>
+          </div>
+
+          <!-- Step 4 -->
+          <div class="flex flex-col items-center text-center p-6 rounded-3xl bg-slate-50 border border-slate-100 hover:bg-amber-50/50 hover:border-amber-200 transition-all duration-300">
+            <div class="w-16 h-16 rounded-2xl bg-warmGold-500 text-white flex items-center justify-center text-2xl font-black shadow-lg shadow-warmGold-500/30 mb-6">
+              4
+            </div>
+            <h3 class="text-xl font-bold text-slate-900 mb-2">استلم المفتاح ومبروك سكنك</h3>
+            <p class="text-slate-600 text-sm leading-relaxed">انتقل لمسكنك براحة بال تامة واستمتع بتجربة إقامة مريحة واستقرار يدعم نجاحك.</p>
+          </div>
+
+        </div>
+
+        <div class="text-center mt-12">
+          <a href="https://sakanak.web.app" target="_blank" class="inline-flex items-center gap-3 px-8 py-4 rounded-2xl bg-brand-700 hover:bg-brand-800 text-white font-bold text-base shadow-xl shadow-brand-700/25 transition">
+            <span>ابدأ البحث الآن في سكنك</span>
+            <i class="fa-solid fa-arrow-left"></i>
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==================== 6. For Property Owners ==================== -->
+    <section id="owners" class="py-20 bg-gradient-to-br from-brand-900 via-brand-800 to-slate-950 text-white relative overflow-hidden">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="bg-white/5 border border-white/10 rounded-3xl p-8 sm:p-14 backdrop-blur-xl">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            
+            <div>
+              <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-emeraldAccent-500/20 text-emeraldAccent-300 text-xs font-bold mb-4">
+                <i class="fa-solid fa-key"></i> فرصة للمؤجرين وأصحاب العقارات
+              </div>
+              <h2 class="text-3xl sm:text-4xl font-black mb-6 leading-tight">
+                هل تمتلك شقة، استوديو، أو مبنى سكن طلاب؟ اعرضه على سكنك
+              </h2>
+              <p class="text-slate-300 text-base leading-relaxed mb-8">
+                صل إلى أكثر من 50 ألف مستأجر وطالب يبحثون يومياً عن سكن موثوق. نمنحك لوحة تحكم ذكية لإدارة حجوزاتك، تأكيد المستأجرين، وتحقيق أقصى عائد إيجاري بدون إضاعة وقتك.
+              </p>
+
+              <div class="grid grid-cols-2 gap-4 mb-8 text-sm font-semibold">
+                <div class="flex items-center gap-2">
+                  <i class="fa-solid fa-circle-check text-emeraldAccent-400"></i> نشر مجاني وسريع للوحدات
+                </div>
+                <div class="flex items-center gap-2">
+                  <i class="fa-solid fa-circle-check text-emeraldAccent-400"></i> فحص جديّة المستأجرين
+                </div>
+                <div class="flex items-center gap-2">
+                  <i class="fa-solid fa-circle-check text-emeraldAccent-400"></i> بدون سماسرة مزعجين
+                </div>
+                <div class="flex items-center gap-2">
+                  <i class="fa-solid fa-circle-check text-emeraldAccent-400"></i> إشعارات فورية بالحجوزات
+                </div>
+              </div>
+
+              <div class="flex flex-wrap gap-4">
+                <a href="https://sakanak.web.app" target="_blank" class="px-7 py-3.5 rounded-xl bg-emeraldAccent-600 hover:bg-emeraldAccent-500 text-white font-bold text-sm shadow-lg shadow-emeraldAccent-600/30 transition">
+                  أضف عقارك الآن مجاناً
+                </a>
+                <a href="https://sakanak.web.app" target="_blank" class="px-7 py-3.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-sm transition">
+                  تعرف على مزايا الملاك
+                </a>
+              </div>
+            </div>
+
+            <!-- Visual Dashboard Preview -->
+            <div class="relative">
+              <div class="bg-slate-900/90 border border-slate-700 rounded-2xl p-6 shadow-2xl">
+                <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-4">
+                  <div class="flex items-center gap-2">
+                    <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                    <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                    <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                    <span class="text-xs text-slate-400 mr-2 font-mono">لوحة تحكم المالك | سكنك</span>
+                  </div>
+                  <span class="text-xs text-emeraldAccent-400 bg-emerald-500/10 px-2.5 py-1 rounded-md">معدل إشغال 100%</span>
+                </div>
+
+                <div class="space-y-4">
+                  <div class="p-3.5 bg-slate-800/60 rounded-xl flex items-center justify-between">
+                    <div>
+                      <p class="text-xs text-slate-400">طلب استئجار جديد</p>
+                      <p class="text-sm font-bold text-white">طالب هندسة - شقة رقم 402</p>
+                    </div>
+                    <span class="text-xs px-2.5 py-1 bg-brand-500/20 text-brand-300 rounded font-bold">بانتظار موافقتك</span>
+                  </div>
+
+                  <div class="p-3.5 bg-slate-800/60 rounded-xl flex items-center justify-between">
+                    <div>
+                      <p class="text-xs text-slate-400">المشاهدات الشهرية</p>
+                      <p class="text-lg font-black text-emeraldAccent-400">1,420 زيارة</p>
+                    </div>
+                    <i class="fa-solid fa-chart-line text-emerald-400 text-2xl"></i>
+                  </div>
+
+                  <div class="p-3.5 bg-slate-800/60 rounded-xl flex items-center justify-between">
+                    <div>
+                      <p class="text-xs text-slate-400">العائد المحقق هذا الشهر</p>
+                      <p class="text-lg font-black text-warmGold-400">منتظم بالكامل</p>
+                    </div>
+                    <i class="fa-solid fa-wallet text-warmGold-400 text-2xl"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 7. Testimonials ==================== -->
+    <section id="testimonials" class="py-24 bg-slate-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-2xl mx-auto mb-16">
+          <span class="text-brand-600 font-extrabold text-sm uppercase tracking-wider block mb-2">قصص نجاح وتجارب حقيقية</span>
+          <h2 class="text-3xl sm:text-4xl font-black text-slate-900">ماذا يقول مستخدمو سكنك؟</h2>
+          <p class="text-slate-500 mt-3 text-base">آراء الطلاب، الموظفين، والمؤجرين الذين وثقوا بمنصة سكنك ووجدوا راحتهم واستقرارهم.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          
+          <!-- Testimonial 1 -->
+          <div class="bg-white p-7 rounded-3xl border border-slate-200/80 shadow-sm hover:shadow-md transition">
+            <div class="flex items-center gap-1 text-amber-400 mb-4 text-sm">
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+            </div>
+            <p class="text-slate-600 text-sm leading-relaxed mb-6 font-medium">
+              "كنت مغترباً للمرة الأولى ومرعوباً من التعامل مع السماسرة والأسعار المبالغ فيها. عبر تطبيق سكنك حجزت استوديو مفروش نظيف جداً وقريب من جامعتي بـ 10 دقائق فقط وبدون ولا مليم عمولة!"
+            </p>
+            <div class="flex items-center gap-3">
+              <div class="w-11 h-11 rounded-full bg-brand-100 text-brand-700 flex items-center justify-center font-bold">
+                ع.م
+              </div>
+              <div>
+                <h4 class="font-bold text-slate-900 text-sm">عمر مصطفى</h4>
+                <p class="text-xs text-slate-400">طالب طب بشري - القاهرة</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Testimonial 2 -->
+          <div class="bg-white p-7 rounded-3xl border border-slate-200/80 shadow-sm hover:shadow-md transition">
+            <div class="flex items-center gap-1 text-amber-400 mb-4 text-sm">
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+            </div>
+            <p class="text-slate-600 text-sm leading-relaxed mb-6 font-medium">
+              "كمالك لعقار في الشيخ زايد، كنت أعاني من عدم جدية المستأجرين. بعد إدراج وحداتي في منصة سكنك، تم تأجيرها خلال 48 ساعة فقط لمستأجرين محترمين جداً مع سهولة كاملة في إدارة العقد."
+            </p>
+            <div class="flex items-center gap-3">
+              <div class="w-11 h-11 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold">
+                م.س
+              </div>
+              <div>
+                <h4 class="font-bold text-slate-900 text-sm">م. سمير رضوان</h4>
+                <p class="text-xs text-slate-400">مالك ومؤجر عقارات - زايد</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Testimonial 3 -->
+          <div class="bg-white p-7 rounded-3xl border border-slate-200/80 shadow-sm hover:shadow-md transition">
+            <div class="flex items-center gap-1 text-amber-400 mb-4 text-sm">
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+            </div>
+            <p class="text-slate-600 text-sm leading-relaxed mb-6 font-medium">
+              "فكرة وجود فلاتر تبحث تحديداً عن سكن بنات وسكن موظفين بأمان تام أعطتنا راحة بال كبيرة. الصور مطابقة تماماً للواقع والخدمة ممتازة، شكراً لفريق سكنك الرائع!"
+            </p>
+            <div class="flex items-center gap-3">
+              <div class="w-11 h-11 rounded-full bg-purple-100 text-purple-700 flex items-center justify-center font-bold">
+                ن.ك
+              </div>
+              <div>
+                <h4 class="font-bold text-slate-900 text-sm">نوران كريم</h4>
+                <p class="text-xs text-slate-400">مهندسة برمجيات - التجمع</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 8. FAQ Section ==================== -->
+    <section id="faq" class="py-24 bg-white border-t border-slate-100">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center mb-16">
+          <span class="text-brand-600 font-extrabold text-sm uppercase tracking-wider block mb-2">إجابات واضحة وشفافة</span>
+          <h2 class="text-3xl sm:text-4xl font-black text-slate-900">الأسئلة الأكثر شيوعاً عن سكنك</h2>
+          <p class="text-slate-500 mt-2 text-base">كل ما تحتاج لمعرفته قبل بدء رحلتك واستئجار أو عرض وحدتك السكنية.</p>
+        </div>
+
+        <div class="space-y-4">
+          
+          <!-- FAQ 1 -->
+          <div class="border border-slate-200 rounded-2xl overflow-hidden transition-all duration-200 bg-slate-50/50">
+            <button type="button" class="faq-btn w-full px-6 py-5 text-right font-bold text-slate-800 flex justify-between items-center focus:outline-none">
+              <span class="text-base sm:text-lg">هل تدفع أي عمولات أو رسوم وساطة عند الاستئجار؟</span>
+              <i class="fa-solid fa-chevron-down text-slate-400 transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content hidden px-6 pb-5 text-sm text-slate-600 leading-relaxed">
+              لا، منصة سكنك تتيح التواصل المباشر بين المستأجر وصاحب العقار، مما يوفر عليك تماماً مصاريف السمسرة والعمولات التي كانت تكلفك ما بين نصف شهر إلى شهر كامل في الأنظمة التقليدية.
+            </div>
+          </div>
+
+          <!-- FAQ 2 -->
+          <div class="border border-slate-200 rounded-2xl overflow-hidden transition-all duration-200 bg-slate-50/50">
+            <button type="button" class="faq-btn w-full px-6 py-5 text-right font-bold text-slate-800 flex justify-between items-center focus:outline-none">
+              <span class="text-base sm:text-lg">كيف أضمن أن الصور مطابقة للواقع؟</span>
+              <i class="fa-solid fa-chevron-down text-slate-400 transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content hidden px-6 pb-5 text-sm text-slate-600 leading-relaxed">
+              يقوم فريق فحص الجودة في سكنك بمطابقة الوحدات والتأكد من بيانات الملاك، كما نتيح للمستأجرين خاصية معاينة المكان أو طلب جولة فيديو مباشرة مع المالك قبل توقيع العقد أو دفع أي عربون.
+            </div>
+          </div>
+
+          <!-- FAQ 3 -->
+          <div class="border border-slate-200 rounded-2xl overflow-hidden transition-all duration-200 bg-slate-50/50">
+            <button type="button" class="faq-btn w-full px-6 py-5 text-right font-bold text-slate-800 flex justify-between items-center focus:outline-none">
+              <span class="text-base sm:text-lg">كيف يمكنني كمالك عقار إضافة شقتي أو سكني على المنصة؟</span>
+              <i class="fa-solid fa-chevron-down text-slate-400 transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content hidden px-6 pb-5 text-sm text-slate-600 leading-relaxed">
+              بكل سهولة، ادخل إلى التطبيق عبر الرابط <a href="https://sakanak.web.app" class="text-brand-600 font-bold underline">https://sakanak.web.app</a>، واضغط على "أضف عقارك"، قم بملء تفاصيل الوحدة وإرفاق الصور وسعر الإيجار وسيتم تفعيل إعلانك فور المراجعة السريعة.
+            </div>
+          </div>
+
+          <!-- FAQ 4 -->
+          <div class="border border-slate-200 rounded-2xl overflow-hidden transition-all duration-200 bg-slate-50/50">
+            <button type="button" class="faq-btn w-full px-6 py-5 text-right font-bold text-slate-800 flex justify-between items-center focus:outline-none">
+              <span class="text-base sm:text-lg">هل تتوفر وحدات مخصصة فقط للطالبات أو للموظفات؟</span>
+              <i class="fa-solid fa-chevron-down text-slate-400 transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content hidden px-6 pb-5 text-sm text-slate-600 leading-relaxed">
+              نعم، نوفر قسماً مخصصاً لسكن الطالبات والموظفات يتميز بالخصوصية التامة والحراسة والأمان، ويمكن فلترة نتائج البحث لاختيار سكن بنات فقط بضغطة واحدة.
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==================== 9. Final CTA ==================== -->
+    <section class="py-20 relative overflow-hidden bg-gradient-to-r from-brand-700 via-brand-800 to-slate-900 text-white text-center">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        
+        <div class="w-16 h-16 rounded-3xl bg-white/10 flex items-center justify-center mx-auto mb-6 text-3xl text-emeraldAccent-400 border border-white/20">
+          <i class="fa-solid fa-sparkles"></i>
+        </div>
+
+        <h2 class="text-3xl sm:text-5xl font-black leading-tight mb-6">
+          جاهز لتجد سكن أحلامك دون عناء؟
+        </h2>
+        <p class="text-base sm:text-xl text-slate-300 max-w-2xl mx-auto mb-10 font-medium">
+          انضم لعشرات الآلاف من المستأجرين السعداء وابدأ البحث في منصة سكنك الآن مجاناً وبأعلى درجات الأمان والسرعة.
+        </p>
+
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a href="https://sakanak.web.app" target="_blank" class="w-full sm:w-auto px-9 py-4 rounded-2xl bg-emeraldAccent-500 hover:bg-emeraldAccent-400 text-white font-extrabold text-base shadow-xl shadow-emeraldAccent-500/30 transition transform hover:-translate-y-0.5 flex items-center justify-center gap-3">
+            <span>دخول منصة سكنك الآن</span>
+            <i class="fa-solid fa-arrow-left"></i>
+          </a>
+          <a href="https://sakanak.web.app" target="_blank" class="w-full sm:w-auto px-8 py-4 rounded-2xl bg-white/10 hover:bg-white/20 text-white font-bold text-base border border-white/20 transition flex items-center justify-center gap-2">
+            <i class="fa-solid fa-globe"></i>
+            <span>تصفح نسخة الويب المباشرة</span>
+          </a>
+        </div>
+
+        <p class="text-xs text-slate-400 mt-6">
+          رابط المنصة الرسمي: <a href="https://sakanak.web.app" target="_blank" class="underline text-emeraldAccent-300">https://sakanak.web.app</a>
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==================== 10. Footer ==================== -->
+  <footer class="bg-slate-950 text-slate-400 pt-16 pb-8 border-t border-slate-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-slate-900">
+        
+        <!-- Brand Info -->
+        <div class="lg:col-span-2 space-y-4">
+          <a href="https://sakanak.web.app" class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-brand-600 flex items-center justify-center text-white text-xl">
+              <i class="fa-solid fa-house-chimney-window"></i>
+            </div>
+            <span class="text-2xl font-black text-white">سَكَنَكْ | Sakanak</span>
+          </a>
+          <p class="text-sm leading-relaxed text-slate-400 max-w-sm">
+            المنصة الذكية المتكاملة للبحث عن السكن وتأجير الشقق والاستوديوهات وسكن الطلاب، تضمن تجربة آمنة، مباشرة وبدون وساطة سماسرة.
+          </p>
+          <div class="flex items-center gap-3 pt-2">
+            <a href="https://sakanak.web.app" class="w-9 h-9 rounded-lg bg-slate-900 hover:bg-brand-600 hover:text-white flex items-center justify-center text-slate-400 transition"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="https://sakanak.web.app" class="w-9 h-9 rounded-lg bg-slate-900 hover:bg-brand-600 hover:text-white flex items-center justify-center text-slate-400 transition"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="https://sakanak.web.app" class="w-9 h-9 rounded-lg bg-slate-900 hover:bg-brand-600 hover:text-white flex items-center justify-center text-slate-400 transition"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://sakanak.web.app" class="w-9 h-9 rounded-lg bg-slate-900 hover:bg-brand-600 hover:text-white flex items-center justify-center text-slate-400 transition"><i class="fa-brands fa-whatsapp"></i></a>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div>
+          <h4 class="text-white font-bold text-sm mb-4">روابط سريعة</h4>
+          <ul class="space-y-2.5 text-sm">
+            <li><a href="https://sakanak.web.app" class="hover:text-white transition">الرئيسية</a></li>
+            <li><a href="#features" class="hover:text-white transition">مميزات المنصة</a></li>
+            <li><a href="#categories" class="hover:text-white transition">فئات السكن</a></li>
+            <li><a href="#how-it-works" class="hover:text-white transition">كيف نعمل</a></li>
+            <li><a href="https://sakanak.web.app" class="hover:text-white transition">أضف عقارك</a></li>
+          </ul>
+        </div>
+
+        <!-- Top Cities -->
+        <div>
+          <h4 class="text-white font-bold text-sm mb-4">المدن والمناطق</h4>
+          <ul class="space-y-2.5 text-sm">
+            <li><a href="https://sakanak.web.app" class="hover:text-white transition">سكن القاهرة والتجمع</a></li>
+            <li><a href="https://sakanak.web.app" class="hover:text-white transition">شقق الشيخ زايد وأكتوبر</a></li>
+            <li><a href="https://sakanak.web.app" class="hover:text-white transition">سكن جامعة الإسكندرية</a></li>
+            <li><a href="https://sakanak.web.app" class="hover:text-white transition">سكن المنصورة الجامعي</a></li>
+            <li><a href="https://sakanak.web.app" class="hover:text-white transition">استوديوهات مدينة نصر</a></li>
+          </ul>
+        </div>
+
+        <!-- Contact & Legal -->
+        <div>
+          <h4 class="text-white font-bold text-sm mb-4">الدعم والأمان</h4>
+          <ul class="space-y-2.5 text-sm">
+            <li><a href="https://sakanak.web.app" class="hover:text-white transition">مركز المساعدة</a></li>
+            <li><a href="https://sakanak.web.app" class="hover:text-white transition">شروط الاستخدام</a></li>
+            <li><a href="https://sakanak.web.app" class="hover:text-white transition">سياسة الخصوصية</a></li>
+            <li><a href="https://sakanak.web.app" class="hover:text-white transition">ضمان المعاينة والمطابقة</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Bottom Bar -->
+      <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+        <p>© 2026 منصة سكنك (Sakanak). جميع الحقوق محفوظة.</p>
+        <p class="flex items-center gap-1">
+          تم التصميم بحب لخدمة الطلاب والمستأجرين في كل مكان
+        </p>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- ==================== Interactive Scripts ==================== -->
+  <script>
+    // Mobile Navigation Toggle
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+    mobileMenuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    mobileNavLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+      });
+    });
+
+    // Accordion for FAQs
+    const faqBtns = document.querySelectorAll('.faq-btn');
+    faqBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const content = btn.nextElementSibling;
+        const icon = btn.querySelector('i');
+        const isOpen = !content.classList.contains('hidden');
+
+        // Close all first
+        document.querySelectorAll('.faq-content').forEach(c => c.classList.add('hidden'));
+        document.querySelectorAll('.faq-btn i').forEach(ic => ic.classList.remove('rotate-180'));
+
+        if (!isOpen) {
+          content.classList.remove('hidden');
+          icon.classList.add('rotate-180');
+        }
+      });
+    });
+
+    // Hero Search Form interaction
+    const heroSearchForm = document.getElementById('heroSearchForm');
+    heroSearchForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      // Directly open the application url
+      window.open('https://sakanak.web.app', '_blank');
+    });
+
+    // Interactive Search Tabs styling
+    const searchTabs = document.querySelectorAll('.search-tab-btn');
+    searchTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        searchTabs.forEach(t => {
+          t.classList.remove('active', 'text-brand-600', 'border-b-2', 'border-brand-600');
+          t.classList.add('text-slate-500');
+        });
+        tab.classList.add('active', 'text-brand-600', 'border-b-2', 'border-brand-600');
+        tab.classList.remove('text-slate-500');
+      });
+    });
+  </script>
+
+</body>
+</html>
+```
